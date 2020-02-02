@@ -17,6 +17,8 @@
  * @return {number[]}
  */
 // 思路2：迭代
+// 因为是前序遍历，所以当前节点的值可以直接放到结果中
+// 然后使用栈保存左右子节点，先入右节点，再入左节点，保证左节点先处理
 var preorderTraversal = function(root) {
     if (!root) return []
     let stack = [root], result = []
