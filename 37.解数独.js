@@ -42,8 +42,6 @@ var solveSudoku = function (board) {
         // 是'.'，尝试填充数字
         // 当前行剩下哪几个数字没使用的，循环填充
         let rowArr = Array.from(rowSets[i].keys())
-        // tmpArr用来保存已经用过的数字
-        let tmpArr = []
         for (let num of rowArr) {
             let blockIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3)
             // 当前数字是否符合条件（不在列中也不在block中）
@@ -53,7 +51,6 @@ var solveSudoku = function (board) {
                 colSets[j].delete(num)
                 blockSets[blockIndex].delete(num)
                 board[i][j] = num
-                tmpArr.push(num)
                 // 判断当前是否找到解法，没找到则继续往下找
                 if (j === 8 && i === 8) return true
                 let result
