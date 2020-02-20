@@ -9,6 +9,10 @@
  * @param {character[][]} board
  * @return {void} Do not return anything, modify board in-place instead.
  */
+// 数独的思路就是递归+回溯
+// 从第一行第一列开始，遇到数字就跳过，遇到空的就尝试填1,2,3,4...9，但是要注意不能填重复的数字
+// 然后继续递归找下一个
+// 如果到某一个空位置，发现什么都填不了，说明当前的路不通，那么就回溯
 var solveSudoku = function (board) {
     // 用三个set保存当前行、列、块中可以使用的数字
     let rowSets = Array.from({ length: 9 }, () => new Set(["1", "2", "3", "4", "5", "6", '7', '8', '9']))
