@@ -9,7 +9,7 @@
  * @param {number[]} nums
  * @return {number[]}
  */
-// 快排：简单版本，空间复杂度O(n)，时间复杂度平均O(nlogn)
+// 快排：简单版本，空间复杂度O(n + nlogn)，时间复杂度平均O(nlogn)
 // 分组思路就是for循环对比，把比select小的数放到left数组，比select大的数放到right数组
 // 然后递归执行分组完成所有的排序
 // 执行用时140ms，内存消耗55.5MB，击败了5%的人，哈哈哈
@@ -22,7 +22,7 @@ var sortArray1 = function (nums) {
     return sortArray(leftArr).concat(select, ...sortArray(rightArr));
 };
 
-// 快排，原地排序，空间复杂度O(1)
+// 快排，原地排序，空间复杂度O(nlogn)
 // 这个思路比较笨，就是在进行分组时，如果select比当前值大，
 // 我是把select和后面的几个元素一步一步后移来实现的，
 // 导致时间复杂度变高了，因此最后的结果是执行用时716ms，击败了36.79%的人；
@@ -49,12 +49,13 @@ var sortArray2 = function (nums, l = 0, r = nums.length - 1) {
     sortArray(nums, select + 1, r)
     return nums
 }
-// 快速排序 思路3：双指针交换法。空间复杂度O(1)
+// 快速排序 思路3：双指针交换法。空间复杂度O(nlogn)
 // 既然要进行左右分组，而且不占用额外空间，那就每次进行交换
 // 设立左右两个指针，分别从头和尾向中间遍历
 // 如果右指针的元素小于select，则交换到左边；如果左指针的元素大于select，则交换到右边
 // 当俩指针相遇时，分组自然完成了
 // 时间116 ms，击败79.43%。空间40.7MB击败67.42%
+// 注：参考博客https://www.jianshu.com/p/5f38dd54b11f
 var sortArray = function (nums, l = 0, r = nums.length - 1) {
     if (!nums || nums.length <= 1 || l >= r) return nums
     let selectVal = nums[l], left = l, right = r
