@@ -9,7 +9,7 @@
 // @lc code=start
 
 /**
- * 中心扩展计算i点长度
+ * 辅助函数：中心扩展计算i点长度
  * @param {*} P 
  * @param {*} i 
  * @param {*} originLen 
@@ -45,7 +45,7 @@ var longestPalindrome = function (s) {
     // 开始计算T的值
     let maxLenIndex = 2, maxLen = 1;
     P.forEach((str, i) => {
-        // ^$#不用计算，就是0
+        // ^$不用计算，就是0
         if (str === '^' || str === '&') {
             T[i] = 0
         } else {
@@ -80,8 +80,6 @@ var longestPalindrome = function (s) {
     });
     // -1以后变成偶数，除以2时正好得到半径
     maxLen -= 1
-
-    // maxLen <= 0  && (maxLen = 0)
     // 先找到P数组中左右index
     let left = maxLenIndex - maxLen
     let right = maxLenIndex + maxLen
@@ -92,36 +90,36 @@ var longestPalindrome = function (s) {
 };
 
 // 思路2：中心扩展法
-// var longestPalindrome2 = function (s) {
-//     let cIndex = 0, maxLen = 1;
-//     for (let i = 0; i < s.length; i++) {
-//         // 考虑奇数
-//         let l = i - 1, r = i + 1, len = 1
-//         while (r < s.length && l >= 0 && s.charAt(l) == s.charAt(r)) {
-//             l--
-//             r++
-//             len+=2
-//         }
-//         if (maxLen < len) {
-//             maxLen = len
-//             cIndex = l+1
-//         }
-//         if (s.charAt(i) == s.charAt(i+1)) {
-//             // 考虑偶数
-//             let l = i - 1, r = i + 2, len = 2
-//             while (r < s.length && l >= 0 && s.charAt(l) == s.charAt(r)) {
-//                 l--
-//                 r++
-//                 len+=2
-//             }
-//             if (maxLen < len) {
-//                 maxLen = len
-//                 cIndex = l+1
-//             }
-//         }
-//     }
-//     return s.substr(cIndex, maxLen)
-// }
+var longestPalindrome2 = function (s) {
+    let cIndex = 0, maxLen = 1;
+    for (let i = 0; i < s.length; i++) {
+        // 考虑奇数
+        let l = i - 1, r = i + 1, len = 1
+        while (r < s.length && l >= 0 && s.charAt(l) == s.charAt(r)) {
+            l--
+            r++
+            len+=2
+        }
+        if (maxLen < len) {
+            maxLen = len
+            cIndex = l+1
+        }
+        if (s.charAt(i) == s.charAt(i+1)) {
+            // 考虑偶数
+            let l = i - 1, r = i + 2, len = 2
+            while (r < s.length && l >= 0 && s.charAt(l) == s.charAt(r)) {
+                l--
+                r++
+                len+=2
+            }
+            if (maxLen < len) {
+                maxLen = len
+                cIndex = l+1
+            }
+        }
+    }
+    return s.substr(cIndex, maxLen)
+}
 
 // @lc code=end
 
