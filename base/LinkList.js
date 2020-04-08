@@ -121,8 +121,7 @@ class LinkList {
 
     if (this.length === 0) {
       this.head = this.tail = new Node(val, null, null);
-    }
-    if (index === 0) {
+    } else if (index === 0) {
       // 插入头结点
       let next = this.head;
       this.head = new Node(val, next, null);
@@ -412,171 +411,172 @@ class LinkList {
     this._part(R.next, r, compareFun);
   }
 }
-//! 测试创建链表
-var list = new LinkList([3, 7, 4, 9, 1, 5, 2, 8]);
-var list2 = new LinkList(list);
-console.log(list.toString() === list2.toString());
+module.exports = LinkList;
+// //! 测试创建链表
+// var list = new LinkList([3, 7, 4, 9, 1, 5, 2, 8]);
+// var list2 = new LinkList(list);
+// console.log(list.toString() === list2.toString());
 
-//!测试创建linkList
-var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
-console.log(
-  list.toString() === `3 <=> 7 <=> 2 <=> 6 <=> 9 <=> "yangkai" <=> {"age":3}`
-);
-console.log(
-  list.toString("reverse") ===
-  `{"age":3} <=> "yangkai" <=> 9 <=> 6 <=> 2 <=> 7 <=> 3`
-);
-var list = new LinkList(3);
-console.log(list.toString() === `null <=> null <=> null`);
-console.log(list.toString("reverse") === `null <=> null <=> null`);
-//!测试排序链表
-var list = new LinkList([3, 7, 4, 9, 1, 5, 2, 8]);
-list.sort();
-console.log(list.toString() === `1 <=> 2 <=> 3 <=> 4 <=> 5 <=> 7 <=> 8 <=> 9`);
-var list = new LinkList([
-  { name: "5", age: 5 },
-  { name: "99", age: 99 },
-  { name: "37", age: 37 },
-  { name: "82", age: 82 }
-]);
-list.sort((a, b) => b.age - a.age); // 根据年龄倒序
-console.log(
-  list.toString() ===
-  `{"name":"99","age":99} <=> {"name":"82","age":82} <=> {"name":"37","age":37} <=> {"name":"5","age":5}`
-);
+// //!测试创建linkList
+// var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
+// console.log(
+//   list.toString() === `3 <=> 7 <=> 2 <=> 6 <=> 9 <=> "yangkai" <=> {"age":3}`
+// );
+// console.log(
+//   list.toString("reverse") ===
+//   `{"age":3} <=> "yangkai" <=> 9 <=> 6 <=> 2 <=> 7 <=> 3`
+// );
+// var list = new LinkList(3);
+// console.log(list.toString() === `null <=> null <=> null`);
+// console.log(list.toString("reverse") === `null <=> null <=> null`);
+// //!测试排序链表
+// var list = new LinkList([3, 7, 4, 9, 1, 5, 2, 8]);
+// list.sort();
+// console.log(list.toString() === `1 <=> 2 <=> 3 <=> 4 <=> 5 <=> 7 <=> 8 <=> 9`);
+// var list = new LinkList([
+//   { name: "5", age: 5 },
+//   { name: "99", age: 99 },
+//   { name: "37", age: 37 },
+//   { name: "82", age: 82 }
+// ]);
+// list.sort((a, b) => b.age - a.age); // 根据年龄倒序
+// console.log(
+//   list.toString() ===
+//   `{"name":"99","age":99} <=> {"name":"82","age":82} <=> {"name":"37","age":37} <=> {"name":"5","age":5}`
+// );
 
-//!测试反转链表
-var list = new LinkList([3, 7, 4]);
-list.reverse();
-console.log(list.toString() === `4 <=> 7 <=> 3`);
-//!测试push和pop
-var list = new LinkList([3, 7]);
-list.push(911);
-console.log(list.get(-1) === 911);
-console.log(list.pop() === 911);
-console.log(list.pop() === 7);
-console.log(list.pop() === 3);
-console.log(list.pop() === undefined);
-//!测试获取节点
-var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
-console.log(list.get(0) === 3);
-console.log(list.get(5) === "yangkai");
-console.log(list.get(list.length - 1).age === 3);
-console.log(list.get(-2) === "yangkai");
-console.log(list.get(-5) === 2);
-//!测试设置节点
-var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
-console.log(list.set(20, 1) === false);
-console.log(list.set(2, 1) === true);
-console.log(list.get(-5) === 1);
-console.log(list.set(-1, "test") === true);
-console.log(list.get(6) === "test");
+// //!测试反转链表
+// var list = new LinkList([3, 7, 4]);
+// list.reverse();
+// console.log(list.toString() === `4 <=> 7 <=> 3`);
+// //!测试push和pop
+// var list = new LinkList([3, 7]);
+// list.push(911);
+// console.log(list.get(-1) === 911);
+// console.log(list.pop() === 911);
+// console.log(list.pop() === 7);
+// console.log(list.pop() === 3);
+// console.log(list.pop() === undefined);
+// //!测试获取节点
+// var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
+// console.log(list.get(0) === 3);
+// console.log(list.get(5) === "yangkai");
+// console.log(list.get(list.length - 1).age === 3);
+// console.log(list.get(-2) === "yangkai");
+// console.log(list.get(-5) === 2);
+// //!测试设置节点
+// var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
+// console.log(list.set(20, 1) === false);
+// console.log(list.set(2, 1) === true);
+// console.log(list.get(-5) === 1);
+// console.log(list.set(-1, "test") === true);
+// console.log(list.get(6) === "test");
 
-//!测试插入头结点
-var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
-list.insert(0, "hahah");
-console.log(
-  list.toString() ===
-  `"hahah" <=> 3 <=> 7 <=> 2 <=> 6 <=> 9 <=> "yangkai" <=> {"age":3}`
-);
-console.log(
-  list.toString("reverse") ===
-  `{"age":3} <=> "yangkai" <=> 9 <=> 6 <=> 2 <=> 7 <=> 3 <=> "hahah"`
-);
-//!测试插入尾结点
-var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
-list.insert(7, "hahah");
-console.log(
-  list.toString() ===
-  `3 <=> 7 <=> 2 <=> 6 <=> 9 <=> "yangkai" <=> {"age":3} <=> "hahah"`
-);
-console.log(
-  list.toString("reverse") ===
-  `"hahah" <=> {"age":3} <=> "yangkai" <=> 9 <=> 6 <=> 2 <=> 7 <=> 3`
-);
-//!测试插入-靠前
-var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
-list.insert(2, "hahah");
-console.log(
-  list.toString() ===
-  `3 <=> 7 <=> "hahah" <=> 2 <=> 6 <=> 9 <=> "yangkai" <=> {"age":3}`
-);
-console.log(
-  list.toString("reverse") ===
-  `{"age":3} <=> "yangkai" <=> 9 <=> 6 <=> 2 <=> "hahah" <=> 7 <=> 3`
-);
-//!测试插入-靠后
-var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
-list.insert(6, "dingrui");
-console.log(
-  list.toString() ===
-  `3 <=> 7 <=> 2 <=> 6 <=> 9 <=> "yangkai" <=> "dingrui" <=> {"age":3}`
-);
-console.log(
-  list.toString("reverse") ===
-  `{"age":3} <=> "dingrui" <=> "yangkai" <=> 9 <=> 6 <=> 2 <=> 7 <=> 3`
-);
-//!测试删除头结点
-var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
-list.delete(0);
-console.log(
-  list.toString() === `7 <=> 2 <=> 6 <=> 9 <=> "yangkai" <=> {"age":3}`
-);
-console.log(
-  list.toString("reverse") === `{"age":3} <=> "yangkai" <=> 9 <=> 6 <=> 2 <=> 7`
-);
-//!测试删除尾巴
-var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
-list.delete(6);
-console.log(list.toString() === `3 <=> 7 <=> 2 <=> 6 <=> 9 <=> "yangkai"`);
-console.log(
-  list.toString("reverse") === `"yangkai" <=> 9 <=> 6 <=> 2 <=> 7 <=> 3`
-);
-//!测试删除超过length
-var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
-list.delete(7);
-console.log(
-  list.toString() === `3 <=> 7 <=> 2 <=> 6 <=> 9 <=> "yangkai" <=> {"age":3}`
-);
-console.log(
-  list.toString("reverse") ===
-  `{"age":3} <=> "yangkai" <=> 9 <=> 6 <=> 2 <=> 7 <=> 3`
-);
-//!测试删除中间的节点-靠后
-var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
-list.delete(5);
-console.log(list.toString() === `3 <=> 7 <=> 2 <=> 6 <=> 9 <=> {"age":3}`);
-console.log(
-  list.toString("reverse") === `{"age":3} <=> 9 <=> 6 <=> 2 <=> 7 <=> 3`
-);
-//!测试删除中间的节点-靠前
-var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
-list.delete(2);
-console.log(
-  list.toString() === `3 <=> 7 <=> 6 <=> 9 <=> "yangkai" <=> {"age":3}`
-);
-console.log(
-  list.toString("reverse") === `{"age":3} <=> "yangkai" <=> 9 <=> 6 <=> 7 <=> 3`
-);
+// //!测试插入头结点
+// var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
+// list.insert(0, "hahah");
+// console.log(
+//   list.toString() ===
+//   `"hahah" <=> 3 <=> 7 <=> 2 <=> 6 <=> 9 <=> "yangkai" <=> {"age":3}`
+// );
+// console.log(
+//   list.toString("reverse") ===
+//   `{"age":3} <=> "yangkai" <=> 9 <=> 6 <=> 2 <=> 7 <=> 3 <=> "hahah"`
+// );
+// //!测试插入尾结点
+// var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
+// list.insert(7, "hahah");
+// console.log(
+//   list.toString() ===
+//   `3 <=> 7 <=> 2 <=> 6 <=> 9 <=> "yangkai" <=> {"age":3} <=> "hahah"`
+// );
+// console.log(
+//   list.toString("reverse") ===
+//   `"hahah" <=> {"age":3} <=> "yangkai" <=> 9 <=> 6 <=> 2 <=> 7 <=> 3`
+// );
+// //!测试插入-靠前
+// var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
+// list.insert(2, "hahah");
+// console.log(
+//   list.toString() ===
+//   `3 <=> 7 <=> "hahah" <=> 2 <=> 6 <=> 9 <=> "yangkai" <=> {"age":3}`
+// );
+// console.log(
+//   list.toString("reverse") ===
+//   `{"age":3} <=> "yangkai" <=> 9 <=> 6 <=> 2 <=> "hahah" <=> 7 <=> 3`
+// );
+// //!测试插入-靠后
+// var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
+// list.insert(6, "dingrui");
+// console.log(
+//   list.toString() ===
+//   `3 <=> 7 <=> 2 <=> 6 <=> 9 <=> "yangkai" <=> "dingrui" <=> {"age":3}`
+// );
+// console.log(
+//   list.toString("reverse") ===
+//   `{"age":3} <=> "dingrui" <=> "yangkai" <=> 9 <=> 6 <=> 2 <=> 7 <=> 3`
+// );
+// //!测试删除头结点
+// var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
+// list.delete(0);
+// console.log(
+//   list.toString() === `7 <=> 2 <=> 6 <=> 9 <=> "yangkai" <=> {"age":3}`
+// );
+// console.log(
+//   list.toString("reverse") === `{"age":3} <=> "yangkai" <=> 9 <=> 6 <=> 2 <=> 7`
+// );
+// //!测试删除尾巴
+// var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
+// list.delete(6);
+// console.log(list.toString() === `3 <=> 7 <=> 2 <=> 6 <=> 9 <=> "yangkai"`);
+// console.log(
+//   list.toString("reverse") === `"yangkai" <=> 9 <=> 6 <=> 2 <=> 7 <=> 3`
+// );
+// //!测试删除超过length
+// var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
+// list.delete(7);
+// console.log(
+//   list.toString() === `3 <=> 7 <=> 2 <=> 6 <=> 9 <=> "yangkai" <=> {"age":3}`
+// );
+// console.log(
+//   list.toString("reverse") ===
+//   `{"age":3} <=> "yangkai" <=> 9 <=> 6 <=> 2 <=> 7 <=> 3`
+// );
+// //!测试删除中间的节点-靠后
+// var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
+// list.delete(5);
+// console.log(list.toString() === `3 <=> 7 <=> 2 <=> 6 <=> 9 <=> {"age":3}`);
+// console.log(
+//   list.toString("reverse") === `{"age":3} <=> 9 <=> 6 <=> 2 <=> 7 <=> 3`
+// );
+// //!测试删除中间的节点-靠前
+// var list = new LinkList([3, 7, 2, 6, 9, "yangkai", { age: 3 }]);
+// list.delete(2);
+// console.log(
+//   list.toString() === `3 <=> 7 <=> 6 <=> 9 <=> "yangkai" <=> {"age":3}`
+// );
+// console.log(
+//   list.toString("reverse") === `{"age":3} <=> "yangkai" <=> 9 <=> 6 <=> 7 <=> 3`
+// );
 
-//! 测试合并链表
-var list1 = new LinkList([3, 7, 2]);
-var list2 = new LinkList(["yangkai", { age: 3 }]);
-list1.link(list2);
-console.log(list1.toString() === `3 <=> 7 <=> 2 <=> "yangkai" <=> {"age":3}`);
-console.log(list1.length === 5);
+// //! 测试合并链表
+// var list1 = new LinkList([3, 7, 2]);
+// var list2 = new LinkList(["yangkai", { age: 3 }]);
+// list1.link(list2);
+// console.log(list1.toString() === `3 <=> 7 <=> 2 <=> "yangkai" <=> {"age":3}`);
+// console.log(list1.length === 5);
 
-//! 测试清空链表
-var list1 = new LinkList([3, 7, 2]);
-list1.clear()
-console.log(list1.length === 0);
-console.log(list1.toString() === '');
+// //! 测试清空链表
+// var list1 = new LinkList([3, 7, 2]);
+// list1.clear()
+// console.log(list1.length === 0);
+// console.log(list1.toString() === '');
 
-//! 测试查找元素位置
-var list1 = new LinkList([3, 7, 2, 7]);
-console.log(list1.indexOf(7) === 1)
-console.log(list1.indexOf("7") === -1)
-console.log(list1.lastIndexOf("7") === -1)
-console.log(list1.lastIndexOf(7) === 3)
-console.log(list1.contains(6) === false);
-console.log(list1.contains(2) === true);
+// //! 测试查找元素位置
+// var list1 = new LinkList([3, 7, 2, 7]);
+// console.log(list1.indexOf(7) === 1)
+// console.log(list1.indexOf("7") === -1)
+// console.log(list1.lastIndexOf("7") === -1)
+// console.log(list1.lastIndexOf(7) === 3)
+// console.log(list1.contains(6) === false);
+// console.log(list1.contains(2) === true);
