@@ -17,6 +17,10 @@ class PriorityQueue {
         return this.compareFun(a, b) < 0;
     }
 
+    isEmpty() {
+        return this.list.length === 1;
+    }
+
     /**
      * 插入一个元素
      * @param {any} val 插入的元素
@@ -31,6 +35,9 @@ class PriorityQueue {
      * @returns 返回堆顶的元素
      */
     pop() {
+        if (this.isEmpty()) {
+            return null;
+        }
         let max = this.peek();
         // 首尾交换
         this._swap(this.list.length - 1, 1);
@@ -46,7 +53,7 @@ class PriorityQueue {
      * @returns 返回堆顶元素
      */
     peek() {
-        return this.list[1];
+        return this.isEmpty() ? null : this.list[1];
     }
 
     // 获取父元素的下标
