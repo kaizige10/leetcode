@@ -1,60 +1,47 @@
 /*
- * @lc app=leetcode.cn id=264 lang=javascript
+ * @lc app=leetcode.cn id=23 lang=javascript
  *
- * [264] 丑数 II
+ * [23] 合并K个排序链表
  */
 
 // @lc code=start
 /**
- * 三指针（动态规划）
- * @param {number} n
- * @return {number}
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
  */
-var nthUglyNumber = function (n) {
-    const uglyNums = [0, 1];
-    let i2 = 1, i3 = 1, i5 = 1;
-    while(uglyNums.length < n + 1) {
-        let newUglyNum = Math.min(uglyNums[i2] * 2, uglyNums[i3] * 3, uglyNums[i5] * 5);
-        if (newUglyNum === uglyNums[i2] * 2) {
-            uglyNums[uglyNums.length - 1] !== newUglyNum && uglyNums.push(newUglyNum);
-            i2++;
-        }
-        if (newUglyNum === uglyNums[i3] * 3) {
-            uglyNums[uglyNums.length - 1] !== newUglyNum && uglyNums.push(newUglyNum);
-            i3++;
-        }
-        if (newUglyNum === uglyNums[i5] * 5) {
-            uglyNums[uglyNums.length - 1] !== newUglyNum && uglyNums.push(newUglyNum);
-            i5++;
-        }
-    }
-    return uglyNums[n];
-}
 /**
- * 小顶堆解法
- * @param {number} n
- * @return {number}
+ * 最小优先队列解法
+ * @param {ListNode[]} lists
+ * @return {ListNode}
  */
-var nthUglyNumber1 = function (n) {
-    const uglyNums = [0, 1]
-    const minPQ = new PriorityQueue([], (a, b) => b - a);
-    const repeatSet = new Set();
-    const primes = [2, 3, 5]
-    while (uglyNums.length < n + 1) {
-        let cur = uglyNums[uglyNums.length - 1];
-        primes.forEach(prime => {
-            const uglyNum = cur * prime;
-            if (!repeatSet.has(uglyNum)) {
-                minPQ.push(uglyNum);
-                repeatSet.add(uglyNum);
-            }
-        });
-        const small = minPQ.pop();
-        uglyNums.push(small);
-        repeatSet.delete(small);
+var mergeKLists = function (lists) {
+    const minPQ = new PriorityQueue(
+        lists.filter(node => node != null),
+        (a, b) => {
+            return b.val - a.val
+        }
+    );
+    const sentinel = { val: null, next: null };
+    let prev = sentinel;
+    while (!minPQ.isEmpty()) {
+        // 得到最小的元素
+        let cur = minPQ.pop();
+        // 把它接到prev后面
+        prev.next = cur;
+        // 如果它后面还有元素，那么重新推入优先队列
+        if (cur.next) {
+            minPQ.push(cur.next);
+            cur.next = null;
+        }
+        // prev指针前进
+        prev = cur
     }
-    return uglyNums[n];
+    return sentinel.next;
 };
+// @lc code=end
 
 class PriorityQueue {
     constructor(arr = [], compareFun = this._defaultCompareFun) {
@@ -165,6 +152,3 @@ class PriorityQueue {
         this.list[k2] = temp;
     }
 }
-// @lc code=end
-
-console.log(nthUglyNumber(10));
